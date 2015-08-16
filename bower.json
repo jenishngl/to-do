@@ -1,0 +1,18 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jenishngl/to-do",
+  "authors": [
+    "jenishngl <jenishngl@gmail.com>"
+  ],
+  "description": "A to-Do Real-Time Polymer App",
+  "main": "index.html",
+  "keywords": [
+    "polymer",
+    "to-do",
+    "to",
+    "do",
+    "app"
+  ],
+  "license": "MIT"
+}
