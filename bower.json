@@ -14,5 +14,17 @@
     "do",
     "app"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.1.0",
+    "firebase-element": "GoogleWebComponents/firebase-element#~1.0.3",
+    "google-signin": "GoogleWebComponents/google-signin#~1.0.3",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#~1.0.3",
+    "iron-list": "PolymerElements/iron-list#~1.0.2",
+    "paper-toolbar": "PolymerElements/paper-toolbar#~1.0.4",
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.0.6",
+    "paper-input": "PolymerElements/paper-input#~1.0.11",
+    "paper-item": "PolymerElements/paper-item#~1.0.2",
+    "paper-fab": "PolymerElements/paper-fab#~1.0.3"
+  }
 }
