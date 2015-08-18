@@ -44,8 +44,7 @@
 			<paper-toolbar>
 				<paper-icon-button	icon="menu" paper-drawer-toggle></paper-icon-button>
 				<span class="flex" style="font-weight:500;font-size:22px;">To-Do App</span>
-				<google-signin label-signin="Sign-in" client-id="1059854283183-7f2de4irvn0akf6dn9ippfnth5sh7qp6.apps.googleusercontent.com"></google-signin>
-				<span on-click="signOut">{{userName}}</span>
+				
 			</paper-toolbar>
 			<div id="container">
 				<paper-material id="content" elevation="1">
@@ -57,43 +56,11 @@
 			</div>
 		</paper-header-panel>
 	</paper-drawer-panel>
-	<google-signin-aware
-		signedIn="{{signedIn}}"
-		isAuthorized ="{{isAuthorized}}"
-		needAdditionalAuth="{{needAdditionalAuth}}"
-		on-google-signin-aware-success="handleSignIn"
-		on-google-signin-aware-signed-out="handleSignOut"></google-signin-aware>
 </template>
 </dom-module>
 
 <script>
 	Polymer({
-		is: "to-do",
-		properties: {
-			signedIn: Boolean,
-			isAuthorized: Boolean,
-			needAdditionalAuth: Boolean,
-			userName: {
-				value: '',
-				type: String
-			}
-		},
-		handleSignIn: function(response){
-			var signin = gapi.auth2.getAuthInstance();
-			console.log(signin);
-			this.userName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
-			console.log(response);
-		},
-		handleSignOut: function(response){
-			console.log("Signed Out "+response);
-		},
-		signOut: function(){
-			console.log('Logout');
-			var currentUser = gapi.auth2.getAuthInstance().currentUser.get();
-		    if (currentUser) {
-		    	currentUser.disconnect();
-		    }
-		    gapi.auth2.getAuthInstance().signOut();
-		}
+		is: "to-do"
 	});
 </script>
