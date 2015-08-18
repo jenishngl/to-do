@@ -52,11 +52,15 @@
 					on-google-signin-aware-success="handleSignIn"
 					on-google-signin-aware-signed-out="handleSignOut"></google-signin-aware>
 				<google-signin
+					fetch-basic-profile
 					label-signin="Sign-in"
 					client-id="1059854283183-7f2de4irvn0akf6dn9ippfnth5sh7qp6.apps.googleusercontent.com"></google-signin>
 				<span>{{userName}}</span>
 			</paper-toolbar>
 			<div id="container">
+				<template is="dom-if" if="{{!signedIn}}">
+					Please Signin!
+				</template>
 				<paper-material id="content" elevation="1">
 					Content 1
 				</paper-material>
@@ -73,19 +77,22 @@
 	Polymer({
 		is: "to-do",
 		properties: {
-			signedIn: Boolean,
+			signedIn: {
+				value: false,
+				type: Boolean
+			},
 			isAuthorized: Boolean,
 			needAdditionalAuth: Boolean,
 			userName: String
 		},
 		handleSignIn: function(response){
-			var signin = gapi.auth2.getAuthInstance();
-			console.log(signin);
+			this.signedIn = true;
 			this.userName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
 			console.log(response);
 		},
 		handleSignOut: function(response){	
 			console.log("Signed Out "+response);
+			this.signedIn = false;
 			this.userName = '';
 		}
 	});
