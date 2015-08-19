@@ -61,7 +61,7 @@
 				<google-signin id="signin"
 					fetch-basic-profile
 					label-signin="Sign-in"
-					client-id="1059854283183-7f2de4irvn0akf6dn9ippfnth5sh7qp6.apps.googleusercontent.com"></google-signin>
+					client-id="CLIENT_ID"></google-signin>
 			</paper-toolbar>
 			<div id="container">
 				<template is="dom-if" if="{{!signedIn}}">
@@ -71,7 +71,7 @@
 					<firebase-collection
 						id="firebase"
 						orderByKey="true"
-						location="https://burning-torch-6048.firebaseio.com/to-do-userdb"
+						location="DB_Name"
 						data="{{dbResponse}}"
 						></firebase-collection>
 					<template is="dom-repeat" items="[[dbResponse]]" as="item">
