@@ -81,6 +81,17 @@
 					<iron-icon icon="account-circle" on-click="login"></iron-icon>
 				</template>
 				<span on-click="logout">{{userName}}</span>
+				<google-signin-aware
+					signedIn="{{signedIn}}"
+					isAuthorized ="{{isAuthorized}}"
+					needAdditionalAuth="{{needAdditionalAuth}}"
+					on-google-signin-aware-success="handleSignIn"
+					on-google-signin-aware-signed-out="handleSignOut"></google-signin-aware>
+				<span>{{userName}}</span>
+				<google-signin id="signin"
+					fetch-basic-profile
+					label-signin="Sign-in"
+					client-id="CLIENT_ID"></google-signin>
 			</paper-toolbar>
 
 			<div id="container">
@@ -95,6 +106,13 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
+					<firebase-collection
+						id="firebase"
+						orderByKey="true"
+						location="DB_Name"
+						data="{{dbResponse}}"
+						></firebase-collection>
+					<template is="dom-repeat" items="[[dbResponse]]" as="item">
 						<paper-material id="content" elevation="1">
 							<span>{{item.remainderData}}</span>
 						</paper-material>
