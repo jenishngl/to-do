@@ -1,0 +1,30 @@
+<dom-module id="todo-content">
+<style type="custom-style">
+	:host{
+		display: block;
+	}
+	#content{
+		padding: 12px 12px 12px 12px;
+		margin: 12px 12px 12px 12px;
+	}
+</style>
+<template>
+	<paper-material id="content" elevation="1">
+		<span class="flex" id="text">{{data}}</span>
+		<paper-icon-button icon="done" on-click="done"></paper-icon-button>
+		<paper-icon-button icon="delete" on-click="delete"></paper-icon-button>
+	</paper-material>
+</template>
+</dom-module>
+<script>
+	Polymer({
+		is: "todo-content",
+		properties: {
+			data: String
+		},
+		done: function(){
+			this.$.text.style.textDecoration = "line-through";
+		},
+		delete: function(){}
+	});
+</script>
