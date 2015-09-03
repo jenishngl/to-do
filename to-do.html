@@ -1,18 +1,5 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
-<link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="bower_components/paper-item/paper-item.html">
-<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="bower_components/paper-material/paper-material.html">
-<link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
-<link rel="import" href="bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="bower_components/paper-input/paper-input.html">
-<link rel="import" href="bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="bower_components/firebase-element/firebase-auth.html">
-<link rel="import" href="bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="imports.html">
+<link rel="import" href="todo-content.html">
 
 <dom-module id='to-do'>
 <style type="custom-style">
@@ -96,9 +83,7 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-						<paper-material id="content" elevation="1">
-							<span>{{item.remainderData}}</span>
-						</paper-material>
+						<todo-content data="{{item.remainderData}}"></todo-content>
 					</template>
 				</template>
 			</div>
@@ -143,26 +128,28 @@
 		ready: function(){
 			console.log('Ready');
 			console.log(this.statusknown);
+			if (this.userName != ""){
+				this.signedIn = true;
+			}
 		},
 		signin: function(){
 			console.log(this.userName);
-			this.$.firebaseLogin.login();
-			this.signedIn = true;
-			
+			this.$.firebaseLogin.login();		
 		},
 		llogin: function(e){
 			console.log(e.detail.user);
 			console.log('Logged In');
 			this.userName = this.userResp.google.displayName;
 			this.uid = this.userResp.google.id;
+			this.signedIn = true;
 		},
 		llogout: function(e){
 			this.userName = '';
 			this.uid = '';
+			this.signedIn = false;
 		},
 		signout: function(){
 			this.$.firebaseLogin.logout();
-			this.signedIn = false;
 			console.log('Logged Out');
 			
 		},
