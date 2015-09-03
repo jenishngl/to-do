@@ -50,11 +50,12 @@
 <template>
 	<firebase-auth
 		id="firebaseLogin"
-		autoLogin="true"
 		location="https://burning-torch-6048.firebaseio.com"
 		provider="google"
-		user="{{user}}"
-		statusKnown="{{statusknown}}"></firebase-auth>
+		user="{{userResp}}"
+		statusKnown="{{statusknown}}"
+		on-login="llogin"
+		on-logout="llogout"></firebase-auth>
 
 	<firebase-collection
       location="{{location}}"
@@ -78,20 +79,9 @@
 				<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
 				<span class="flex" style="font-weight:500;font-size:22px;">To-Do App</span>
 				<template is="dom-if" if="{{!signedIn}}">
-					<iron-icon icon="account-circle" on-click="login"></iron-icon>
+					<iron-icon icon="account-circle" on-click="signin"></iron-icon>
 				</template>
-				<span on-click="logout">{{userName}}</span>
-				<google-signin-aware
-					signedIn="{{signedIn}}"
-					isAuthorized ="{{isAuthorized}}"
-					needAdditionalAuth="{{needAdditionalAuth}}"
-					on-google-signin-aware-success="handleSignIn"
-					on-google-signin-aware-signed-out="handleSignOut"></google-signin-aware>
-				<span>{{userName}}</span>
-				<google-signin id="signin"
-					fetch-basic-profile
-					label-signin="Sign-in"
-					client-id="CLIENT_ID"></google-signin>
+				<span on-click="signout">{{userName}}</span>
 			</paper-toolbar>
 
 			<div id="container">
@@ -106,13 +96,6 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-					<firebase-collection
-						id="firebase"
-						orderByKey="true"
-						location="DB_Name"
-						data="{{dbResponse}}"
-						></firebase-collection>
-					<template is="dom-repeat" items="[[dbResponse]]" as="item">
 						<paper-material id="content" elevation="1">
 							<span>{{item.remainderData}}</span>
 						</paper-material>
@@ -139,7 +122,7 @@
 				readOnly: true,
 				notify: true
 			},
-			user: {
+			userResp: {
 				type: Object
 			},
 			userName: {
@@ -159,23 +142,29 @@
 		},
 		ready: function(){
 			console.log('Ready');
+			console.log(this.statusknown);
 		},
-		statusknownChanged: function(){
-			console.log('Changed');
-		},
-		login: function(){
+		signin: function(){
+			console.log(this.userName);
 			this.$.firebaseLogin.login();
 			this.signedIn = true;
-			console.log('Logged In');
-			this.userName = this.user.google.displayName;
-			this.uid = this.user.google.id;
+			
 		},
-		logout: function(){
+		llogin: function(e){
+			console.log(e.detail.user);
+			console.log('Logged In');
+			this.userName = this.userResp.google.displayName;
+			this.uid = this.userResp.google.id;
+		},
+		llogout: function(e){
+			this.userName = '';
+			this.uid = '';
+		},
+		signout: function(){
 			this.$.firebaseLogin.logout();
 			this.signedIn = false;
 			console.log('Logged Out');
-			this.userName = '';
-			this.uid = '';
+			
 		},
 		urlLocation: function(uid){
 			console.log("https://burning-torch-6048.firebaseio.com/to-do-userdb/"+uid);
@@ -185,15 +174,15 @@
 			console.log(this.location);
 			console.log(this.remainder);
 			var write = new Firebase(this.location);
-			if (this.remainder != undefined){
+			if (this.remainder != ''){
 				console.log('Submiting...');
 				var remainderData = this.remainder;
 				write.push({
 					remainderData
 			});
+				this.userName = '';
 			console.log('Added');
 			}
-			
 		}
 	});
 </script>
