@@ -33,12 +33,13 @@
 			}
 		},
 		done: function(){
-			this.$.text.style.textDecoration = "line-through";
 			var doneLocation = new Firebase(this.location+"/"+this.key);
 			if (this.donestat){
 				doneLocation.update({"done" : false});
+				this.$.text.style.textDecoration = "none";
 			}else{
 				doneLocation.update({"done" : true});
+				this.$.text.style.textDecoration = "line-through";
 			}
 			console.log(this.donestat);
 		},
