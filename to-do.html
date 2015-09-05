@@ -46,7 +46,8 @@
 
 	<firebase-collection
       location="{{location}}"
-      data="{{response}}"></firebase-collection>
+      data="{{response}}"
+      on-firebase-child-changed="firebase"></firebase-collection>
 
 	<paper-drawer-panel responsive-width="720px">
 		<paper-header-panel drawer mode="seamed">
@@ -83,7 +84,7 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
+						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}" firebase="{{change}}"></todo-content>
 					</template>
 				</template>
 			</div>
@@ -123,7 +124,7 @@
 				computed: 'urlLocation(uid)' 
 			},
 			remainder: String,
-			done: {
+			change: {
 				value: true,
 				type: Boolean
 			}
@@ -173,6 +174,13 @@
 			});
 				this.userName = '';
 			console.log('Added');
+			}
+		},
+		firebase: function(){
+			if (this.change){
+				this.change = !this.change;
+			}else{
+				this.change = !this.change;
 			}
 		}
 	});

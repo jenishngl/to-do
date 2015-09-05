@@ -10,7 +10,7 @@
 </style>
 <template>
 	<paper-material id="content" elevation="1">
-		<span class="flex" id="text">{{data}}</span>
+		<span class="flex" id="text">{{data}}</span><span>{{donestat}}</span>
 		<paper-icon-button icon="done" on-click="done"></paper-icon-button>
 		<paper-icon-button icon="delete" on-click="delete"></paper-icon-button>
 	</paper-material>
@@ -23,14 +23,19 @@
 			data: String,
 			key: String,
 			location: String,
-			donestat: Boolean
+			donestat: Boolean,
+			firebase: {
+				type: Boolean,
+				notify: true,
+				observer: 'firebaseChanged'
+			}
 		},
 		ready: function(){
 			if(this.donestat){
 				this.$.text.style.textDecoration = "line-through";
-			}else{
+			}else if(!this.donestat){
 				this.$.text.style.textDecoration = "none";
-			}
+			}else{}
 		},
 		done: function(){
 			var doneLocation = new Firebase(this.location+"/"+this.key);
@@ -41,11 +46,17 @@
 				doneLocation.update({"done" : true});
 				this.$.text.style.textDecoration = "line-through";
 			}
-			console.log(this.donestat);
 		},
 		delete: function(){
 			var delLocation = new Firebase(this.location+"/"+this.key);
 			delLocation.remove();
+		},
+		firebaseChanged: function(){
+			if(this.donestat){
+				this.$.text.style.textDecoration = "none";
+			}else if(!this.donestat){
+				this.$.text.style.textDecoration = "line-through";
+			}else{}
 		}
 	});
 </script>
