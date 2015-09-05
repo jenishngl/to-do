@@ -83,7 +83,7 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-						<todo-content data="{{item.remainderData}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
+						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
 					</template>
 				</template>
 			</div>
@@ -122,7 +122,11 @@
 				type: String,
 				computed: 'urlLocation(uid)' 
 			},
-			remainder: String
+			remainder: String,
+			done: {
+				value: true,
+				type: Boolean
+			}
 		},
 		ready: function(){
 			console.log('Ready');

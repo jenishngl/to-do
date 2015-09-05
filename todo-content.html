@@ -23,18 +23,24 @@
 			data: String,
 			key: String,
 			location: String,
-			doneStat: Boolean
+			donestat: Boolean
 		},
 		ready: function(){
-			if(this.doneStat == true){
+			if(this.donestat){
 				this.$.text.style.textDecoration = "line-through";
+			}else{
+				this.$.text.style.textDecoration = "none";
 			}
 		},
 		done: function(){
 			this.$.text.style.textDecoration = "line-through";
 			var doneLocation = new Firebase(this.location+"/"+this.key);
-			doneLocation.update({"done" : true});
-			console.log(this.doneStat);
+			if (this.donestat){
+				doneLocation.update({"done" : false});
+			}else{
+				doneLocation.update({"done" : true});
+			}
+			console.log(this.donestat);
 		},
 		delete: function(){
 			var delLocation = new Firebase(this.location+"/"+this.key);
