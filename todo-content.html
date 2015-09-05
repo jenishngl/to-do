@@ -10,7 +10,7 @@
 </style>
 <template>
 	<paper-material id="content" elevation="1">
-		<span class="flex" id="text">{{data}}</span><span>{{donestat}}</span>
+		<span class="flex" id="text">{{data}}</span>
 		<paper-icon-button icon="done" on-click="done"></paper-icon-button>
 		<paper-icon-button icon="delete" on-click="delete"></paper-icon-button>
 	</paper-material>
@@ -52,10 +52,13 @@
 			delLocation.remove();
 		},
 		firebaseChanged: function(){
+			console.log('ChangedInside');
 			if(this.donestat){
 				this.$.text.style.textDecoration = "none";
+				console.log('ChangedInside1');
 			}else if(!this.donestat){
 				this.$.text.style.textDecoration = "line-through";
+				console.log('ChangedInside2');
 			}else{}
 		}
 	});
