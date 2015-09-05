@@ -83,7 +83,7 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-						<todo-content data="{{item.remainderData}}"></todo-content>
+						<todo-content data="{{item.remainderData}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
 					</template>
 				</template>
 			</div>
@@ -123,7 +123,6 @@
 				computed: 'urlLocation(uid)' 
 			},
 			remainder: String
-
 		},
 		ready: function(){
 			console.log('Ready');

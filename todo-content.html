@@ -20,11 +20,25 @@
 	Polymer({
 		is: "todo-content",
 		properties: {
-			data: String
+			data: String,
+			key: String,
+			location: String,
+			doneStat: Boolean
+		},
+		ready: function(){
+			if(this.doneStat == true){
+				this.$.text.style.textDecoration = "line-through";
+			}
 		},
 		done: function(){
 			this.$.text.style.textDecoration = "line-through";
+			var doneLocation = new Firebase(this.location+"/"+this.key);
+			doneLocation.update({"done" : true});
+			console.log(this.doneStat);
 		},
-		delete: function(){}
+		delete: function(){
+			var delLocation = new Firebase(this.location+"/"+this.key);
+			delLocation.remove();
+		}
 	});
 </script>
