@@ -16,6 +16,11 @@
 			height: 100%;
 			font-family: 'Roboto';
 		}
+		#loading{
++			width: 100%;
++			height: 100%;
++			text-align: center;
++		}
 		.hidden{
 			display: none;
 		}
@@ -23,8 +28,10 @@
 </head>
 <body>
 
+	<div id="loading">
++		<span>Loading...</span>
++	</div>
 	<to-do unresolved></to-do>
-	<span id="loading">Loading...</span>
 
 	<script type="text/javascript">
 
