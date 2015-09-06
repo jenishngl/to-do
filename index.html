@@ -16,9 +16,23 @@
 			height: 100%;
 			font-family: 'Roboto';
 		}
+		.hidden{
+			display: none;
+		}
 	</style>
 </head>
-<body unresolved>
-	<to-do></to-do>
+<body>
+
+	<to-do unresolved></to-do>
+	<span id="loading">Loading...</span>
+
+	<script type="text/javascript">
+
+	window.addEventListener('WebComponentsReady', function(){
+		document.querySelector('#loading').createAttribute('class').setAttribute('class', 'hidden');
+		console.log('Spinner hidden');
+	})
+
+	</script>
 </body>
 </html>
