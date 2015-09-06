@@ -23,22 +23,42 @@
 			data: String,
 			key: String,
 			location: String,
-			doneStat: Boolean
-		},
-		ready: function(){
-			if(this.doneStat == true){
-				this.$.text.style.textDecoration = "line-through";
+			donestat: {
+				type: Boolean,
+				notify: true,
+				observer: 'firebaseChanged'
 			}
 		},
+		ready: function(){
+			if(this.donestat){
+				this.$.text.style.textDecoration = "line-through";
+			}else if(!this.donestat){
+				this.$.text.style.textDecoration = "none";
+			}else{}
+		},
 		done: function(){
-			this.$.text.style.textDecoration = "line-through";
 			var doneLocation = new Firebase(this.location+"/"+this.key);
-			doneLocation.update({"done" : true});
-			console.log(this.doneStat);
+			if (this.donestat){
+				doneLocation.update({"done" : false});
+				this.$.text.style.textDecoration = "none";
+			}else{
+				doneLocation.update({"done" : true});
+				this.$.text.style.textDecoration = "line-through";
+			}
 		},
 		delete: function(){
 			var delLocation = new Firebase(this.location+"/"+this.key);
 			delLocation.remove();
+		},
+		firebaseChanged: function(){
+			console.log('ChangedInside');
+			if(this.donestat){
+				this.$.text.style.textDecoration = "line-through";
+				console.log('ChangedInside1');
+			}else if(!this.donestat){
+				this.$.text.style.textDecoration = "none";
+				console.log('ChangedInside2');
+			}else{}
 		}
 	});
 </script>
