@@ -84,7 +84,7 @@
 						</div>
 					</paper-material>
 					<template is="dom-repeat" items="[[response]]" as="item">
-						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}" firebase="{{change}}"></todo-content>
+						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
 					</template>
 				</template>
 			</div>
@@ -172,7 +172,7 @@
 					remainderData,
 					done: false
 			});
-				this.userName = '';
+				this.remainder = '';
 			console.log('Added');
 			}
 		},

@@ -23,8 +23,7 @@
 			data: String,
 			key: String,
 			location: String,
-			donestat: Boolean,
-			firebase: {
+			donestat: {
 				type: Boolean,
 				notify: true,
 				observer: 'firebaseChanged'
@@ -54,10 +53,10 @@
 		firebaseChanged: function(){
 			console.log('ChangedInside');
 			if(this.donestat){
-				this.$.text.style.textDecoration = "none";
+				this.$.text.style.textDecoration = "line-through";
 				console.log('ChangedInside1');
 			}else if(!this.donestat){
-				this.$.text.style.textDecoration = "line-through";
+				this.$.text.style.textDecoration = "none";
 				console.log('ChangedInside2');
 			}else{}
 		}
