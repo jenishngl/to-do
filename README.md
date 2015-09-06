@@ -5,4 +5,4 @@ This is a To-Do App build using Polymer with the help of Firebase.
 
 Fixed the login issues, now works fine with google login (as on 05.09.2015)
 
-Demo : http://jenishngl.github.io/to-do/
+Demo : https://jenishngl.github.io/to-do/
