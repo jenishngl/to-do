@@ -1,0 +1,6 @@
+{
+	"short_name" : "To-Do App",
+	"name" : "A To-Do WebApp",
+	"display" : "standalone",
+	"orientation" : "portrait"
+}
