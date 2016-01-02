@@ -55,7 +55,7 @@
 				<span class="flex" style="font-weight:500;font-size:22px;">Options</span>
 			</paper-toolbar>
 			<div id="menuContainer" class="fit">
-				<paper-menu id="menuContainer" selected="0">
+				<paper-menu id="menuContainer" selected={{selected}}>
 					<paper-item>To-Do list</paper-item>
 					<paper-item>Item</paper-item>
 					<paper-item>Item</paper-item>
@@ -67,7 +67,7 @@
 				<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
 				<span class="flex" style="font-weight:500;font-size:22px;">To-Do App</span>
 				<template is="dom-if" if="{{!signedIn}}">
-					<iron-icon icon="account-circle" on-click="signin"></iron-icon>
+					<iron-icon style="width:192px; height: 46px;" src="bower_components/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png" on-click="signin"></iron-icon>
 				</template>
 				<span on-click="signout">{{userName}}</span>
 			</paper-toolbar>
@@ -77,15 +77,29 @@
 					<div class="error">Please Signin!</div>
 				</template>
 				<template is="dom-if" if="{{signedIn}}">
-					<paper-material id="content" elevation="1">
-						<div class="horizontal layout">
-							<paper-input class="flex" floatingLabel label="Add a Reminder here" value="{{remainder}}"></paper-input>
-							<paper-fab mini icon="add" on-click="submit">Add</paper-fab>
-						</div>
-					</paper-material>
-					<template is="dom-repeat" items="[[response]]" as="item">
-						<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
-					</template>
+					<iron-pages selected="{{selected}}">
+						<section>
+							<paper-material id="content" elevation="1">
+								<div class="horizontal layout">
+									<paper-input class="flex" floatingLabel label="Add a Reminder here" value="{{remainder}}"></paper-input>
+									<paper-fab mini icon="add" on-click="submit">Add</paper-fab>
+								</div>
+							</paper-material>
+							<template is="dom-repeat" items="[[response]]" as="item">
+								<todo-content data="{{item.remainderData}}" donestat="{{item.done}}" key="{{item.__firebaseKey__}}" location="{{location}}"></todo-content>
+							</template>
+						</section>
+						<section>
+							<paper-material id="content" elevation="2">
+								2
+							</paper-material>
+						</section>
+						<section>
+							<paper-material id="content" elevation="2">
+								3
+							</paper-material>
+						</section>
+					</iron-pages>
 				</template>
 			</div>
 		</paper-header-panel>
@@ -127,6 +141,10 @@
 			change: {
 				value: true,
 				type: Boolean
+			},
+			selected: {
+				value: 0,
+				type: Number
 			}
 		},
 		ready: function(){
@@ -177,12 +195,13 @@
 			}
 		},
 		firebase: function(){
-			console.log('Changed');
+			//console.log('Changed');
 			if (this.change){
 				this.change = !this.change;
 			}else{
 				this.change = !this.change;
 			}
+			console.log(this.selected);
 		}
 	});
 </script>

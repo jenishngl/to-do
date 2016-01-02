@@ -8,8 +8,8 @@
 	<meta name="theme-color" content="#1A237E">
 	<link rel="manifest" href="manifest.json">
 	<title>To-Do App</title>
-	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<link rel="import" href="to-do.html">
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+	<link rel="import" href="to-do.html" async>
 	<style type="text/css">
 		html, body{
 			padding: 0px 0px 0px 0px;
@@ -18,10 +18,10 @@
 			font-family: 'Roboto';
 		}
 		#loading{
-+			width: 100%;
-+			height: 100%;
-+			text-align: center;
-+		}
+			width: 100%;
+			height: 100%;
+			text-align: center;
+		}
 		.hidden{
 			display: none;
 		}
@@ -30,16 +30,16 @@
 <body>
 
 	<div id="loading">
-+		<span>Loading...</span>
-+	</div>
+		<span>Loading App...</span>
+	</div>
 	<to-do unresolved></to-do>
 
 	<script type="text/javascript">
 
 	window.addEventListener('WebComponentsReady', function(){
-		document.querySelector('#loading').createAttribute('class').setAttribute('class', 'hidden');
+		document.getElementById('loading').className = "hidden";
 		console.log('Spinner hidden');
-	})
+	});
 
 	</script>
 </body>

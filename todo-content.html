@@ -51,13 +51,13 @@
 			delLocation.remove();
 		},
 		firebaseChanged: function(){
-			console.log('ChangedInside');
+			//console.log('ChangedInside');
 			if(this.donestat){
 				this.$.text.style.textDecoration = "line-through";
-				console.log('ChangedInside1');
+				//console.log('ChangedInside1');
 			}else if(!this.donestat){
 				this.$.text.style.textDecoration = "none";
-				console.log('ChangedInside2');
+				//console.log('ChangedInside2');
 			}else{}
 		}
 	});
